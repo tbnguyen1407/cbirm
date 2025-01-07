@@ -1,0 +1,69 @@
+plugins {
+    alias(libs.plugins.shadow)
+    alias(libs.plugins.versions.plug)
+    id 'distribution'
+    id 'java'
+}
+
+// dependencies
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(libs.commons.imaging)
+    implementation(libs.metadata.extractor)
+}
+
+// java plugin
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+tasks.named("compileJava") {
+    options.encoding = 'UTF-8'
+}
+
+tasks.named("jar") {
+    manifest {
+        attributes(
+            "Implementation-Title": title,
+            "Implementation-Version": version,
+            "Main-Class": mainClass
+        )
+    }
+}
+
+// distribution plugin
+distributions {
+    main {
+        contents { from shadowJar }
+    }
+}
+
+// shadow plugin
+tasks.named("shadowJar") {
+    minimize()
+}
+
+// versions plugin
+tasks.named("dependencyUpdates") {
+    // disable file output
+    outputFormatter = ""
+
+    // ignore pre-release gradle
+    gradleReleaseChannel = "current"
+
+    // ignore pre-release libs
+    ext.isNonStable = { String version ->
+        def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { itm -> version.toUpperCase().contains(itm) }
+        def regex = /^[0-9,.v-]+(-r)?$/
+        return !stableKeyword && !(version ==~ regex)
+    }
+
+    rejectVersionIf {
+        isNonStable(it.candidate.version)
+    }    
+}

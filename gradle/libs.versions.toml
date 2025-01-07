@@ -1,0 +1,7 @@
+[libraries]
+commons-imaging    = { group = "org.apache.commons", name = "commons-imaging"   , version = "1.0.0-alpha5" }
+metadata-extractor = { group = "com.drewnoakes"    , name = "metadata-extractor", version = "2.19.0"       }
+
+[plugins]
+shadow        = { id = "com.gradleup.shadow",           version = "8.3.5"  }
+versions-plug = { id = "com.github.ben-manes.versions", version = "0.51.0" }
