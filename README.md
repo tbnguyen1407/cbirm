@@ -6,10 +6,23 @@
 
 ## Table of Contents
 
+- [Features](#features)
 - [Development](#development)
     - [Requirements](#requirements)
     - [Build](#build)
 - [Authors](#authors)
+
+## Features
+
+- Organize images based on following categories
+    - Geolocation
+    - Datetime
+    - EXIF tags
+- Search iamges based on following features
+    - Geolocation
+    - Datetime
+    - EXIF tags
+    - Image content features (Color Histogram, Color Coherence Vector, Color Correlogram and Edge Detection)
 
 ## Development
 
