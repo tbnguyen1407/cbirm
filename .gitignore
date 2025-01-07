@@ -252,5 +252,9 @@ paket-files/
 .idea/
 *.sln.iml
 
+# Gradle
+.gradle/
+build/
+
 # Runtime content
 indices/
