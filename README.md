@@ -28,7 +28,7 @@
 
 ### Requirements
 
-- JDK 17+
+- JDK 21+
 
 ### Build
 
